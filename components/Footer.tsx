@@ -6,7 +6,7 @@ import instagram from '../assests/instagram.png'
 
 const Footer = () => {
   return (
-    <footer className="bg-green-100 py-10">
+    <footer className="py-10">
       <div className="flex flex-col justify-center items-center">
         <div className="text-3xl font-bold">Trusted By Farmers</div>
         <div className="flex flex-row justify-around gap-10 mt-7 mb-10">
@@ -16,7 +16,7 @@ const Footer = () => {
           <div className="text-3xl font-bold">Farm</div>
           <div className="text-3xl font-bold">Farm</div>
         </div>
-        <hr className="w-full border-t-4 border-green-200 my-4" />
+        <hr className="w-full border-t-4 my-4" />
       </div>
 
       <div className="grid grid-cols-[2fr,1fr] gap-10 px-7">
@@ -32,13 +32,13 @@ const Footer = () => {
             <span className="font-semibold text-xl">Follow us</span>
             <div className="flex gap-3 mt-3">
               <div>
-                <Image className="w-8 h-8 bg-gray-300 rounded-full" src={x} alt="x logo"/>
+                <Image className="w-8 h-8 rounded-full" src={x} alt="x logo"/>
               </div>
               <div>
-              <Image className="w-8 h-8 bg-gray-300 rounded-full" src={instagram} alt="x logo"/>
+              <Image className="w-8 h-8 rounded-full" src={instagram} alt="x logo"/>
               </div>
               <div>
-              <Image className="w-8 h-8 bg-gray-300 rounded-full" src={gitHub} alt="x logo"/>
+              <Image className="w-8 h-8 rounded-full" src={gitHub} alt="x logo"/>
               </div>
             </div>
           </div>

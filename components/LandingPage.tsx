@@ -1,12 +1,13 @@
 import React from "react";
 import Image from "next/image";
-import farmerImage from "../assests/farmer.png";
-import standingfarmer from "../assests/standingfarmer.png";
+import farmerimg from "../assests/farmer1.png";
+import farmerim from "../assests/farmer3.png";
+import farmerW from '../assests/farmerW.png'
 
 const LandingPage = () => {
   return (
     <div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8 bg-green-100">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8 ">
         <div className="flex flex-col justify-center ml-8">
           <h1 className="text-5xl md:text-6xl font-bold text-black max-w-md">
             KrishiGranth: Your Agriculture
@@ -20,8 +21,9 @@ const LandingPage = () => {
           <Image
             width={468}
             height={300}
-            src={farmerImage}
+            src={farmerimg}
             alt="Farmer working in the field"
+            className="img-float"
           />
         </div>
       </div>
@@ -39,13 +41,14 @@ const LandingPage = () => {
           <h4 className="text-center text-lg font-semibold">Available</h4>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8 bg-green-200">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8 bg-gray-100">
         <div className="flex justify-center">
           <Image
             width={468}
             height={300}
-            src={farmerImage}
+            src={farmerim}
             alt="Farmer working in the field"
+            className="img-float" 
           />
         </div>
         <div className="flex flex-col justify-center ml-8">
@@ -57,16 +60,17 @@ const LandingPage = () => {
           </p>
         </div>
       </div>
-      <div className="flex justify-center bg-green-200">
+      <div className="flex justify-center bg-gray-100">
         <h1 className="text-center text-5xl max-w-lg mt-32 font-bold mb-32">Empowering Farmers with Weather Insights, Crop Guidance, and Government Support</h1>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8 bg-green-200">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-8 bg-gray-100">
         <div className="flex justify-center">
           <Image
             width={468}
             height={300}
-            src={standingfarmer}
+            src={farmerW}
             alt="Farmer working in the field"
+            className="img-float" 
           />
         </div>
         <div className="flex flex-col justify-center ml-8">
