@@ -15,7 +15,7 @@ export const SearchBar = ({ onSearch }) => {
   };
 
   return (
-    <form onSubmit={handleSearch}className="max-w-md mx-auto">
+    <form onSubmit={handleSearch}className="max-w-md mx-auto mt-10 ">
       <label className="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-white">
         Search
       </label>
