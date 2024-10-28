@@ -1,9 +1,9 @@
 "use client";
 
-import Image from "next/image";
+// import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
-import logo from "../assests/logo.png";
+// import logo from "../assests/logo.png";
 import { ClerkLoaded, ClerkLoading, UserButton } from "@clerk/nextjs";
 import { Loader2 } from "lucide-react";
 
@@ -40,6 +40,9 @@ export const Navbar = () => {
   function handleabout() {
     router.push("/about");
   }
+  function handleSell() {
+    router.push("/sell");
+  }
 
   return (
     <nav
@@ -49,9 +52,6 @@ export const Navbar = () => {
       style={{ top: "10px" }}
     >
       <div className="flex flex-row items-center">
-        <div>
-          <Image  src={logo} alt="logo" height={62} width={62} />
-        </div>
         <div
           className="text-2xl font-extrabold text-black cursor-pointer hover hover:scale-105 transform transition-transform duration-300 ease-out"
           onClick={handleHome}
@@ -78,6 +78,9 @@ export const Navbar = () => {
           </span>
           <span className="font-medium text-black cursor-pointer hover:scale-105 transform transition-transform duration-300 ease-out" onClick={handleabout}>
             About
+          </span>
+          <span className="font-medium text-black cursor-pointer hover:scale-105 transform transition-transform duration-300 ease-out" onClick={handleSell}>
+            Sell
           </span>
           <ClerkLoaded>
             <UserButton afterSignOutUrl="/" />

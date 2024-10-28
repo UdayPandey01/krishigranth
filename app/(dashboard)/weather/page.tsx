@@ -90,7 +90,7 @@ const Page = () => {
           zIndex: -1,
         }}
       />
-      <Navbar />
+      <Navbar/>
       <SearchBar onSearch={handleSearch} />
       <div className="grid grid-cols-2">
         <div className="mt-10 flex items-center justify-center">

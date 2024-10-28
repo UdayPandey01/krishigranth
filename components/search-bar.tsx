@@ -26,7 +26,7 @@ export const SearchBar = ({ onSearch }) => {
         <input
           type="search"
           onChange={searchCity}
-          className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50"
+          className="w-full p-4 ps-10 text-sm text-gray-900 rounded-lg bg-gray-50"
           placeholder="Enter the city"
           required
         />
