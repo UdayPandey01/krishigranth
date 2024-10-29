@@ -69,11 +69,11 @@ const Sell = () => {
             placeholder="Farm Location"
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
           />
-          <input
+          {/* <input
             type="text"
             placeholder="Pincode"
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
-          />
+          /> */}
 
           {/* <label className="flex items-center space-x-2 text-sm text-gray-700">
             <input type="checkbox" className="w-4 h-4 text-blue-600" />
