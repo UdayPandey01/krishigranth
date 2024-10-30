@@ -1,7 +1,6 @@
 // models/schems.ts
 import mongoose, { Schema, Document } from "mongoose";
 
-// Define the TypeScript interface for the Crop document
 interface ICrop extends Document {
   cropName: string;
   quantity: number;
@@ -14,7 +13,6 @@ interface ICrop extends Document {
   email?: string;
 }
 
-// Define the schema for the Crop model
 const CropSchema: Schema = new Schema({
   cropName: { type: String, required: true },
   quantity: { type: Number, required: true },
@@ -27,7 +25,9 @@ const CropSchema: Schema = new Schema({
   email: { type: String, required: false },
 });
 
-// Export the Crop model, initializing it only if it doesn't already exist
+console.log(mongoose)
+console.log("first")
+console.log(mongoose.models)
 const Crop = mongoose.models.Crop || mongoose.model<ICrop>("Crop", CropSchema);
 
 export default Crop

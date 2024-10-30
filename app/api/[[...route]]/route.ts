@@ -1,28 +1,18 @@
-import  Crop  from "@/models/schema";
-import connectDb from "@/utils/dbConnect"
-import {Hono} from "hono"
+import { Hono } from "hono";
+import { handle } from "hono/vercel";
+import crops from "./crops"
 
-const app = new Hono()
+export const runtime = 'edge'
 
-app.post('/sell-crop',
-    async(c) => {
-        await connectDb();
+const app = new Hono().basePath('/api')
 
-        try{
-            const data = await c.req.json()
-            const NewCrop = new Crop(data)
-            await NewCrop.save()
-            return c.json({
-                message : "Crop successfully added!",
-                crop : NewCrop
-            }, 201)
-        }catch(error){
-            return c.json({
-                message : "Error saving crop",
-                error
-            }, 500)
-        }
-    }
-)
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const routes = app
+    .route("/crops", crops)
 
-export default app
+export const GET = handle(app)
+export const POST = handle(app)
+export const PATCH = handle(app)
+export const DELETE = handle(app)
+
+export type AppType = typeof routes
