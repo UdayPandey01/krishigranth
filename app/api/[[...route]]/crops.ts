@@ -39,10 +39,13 @@ const app = new Hono()
   })
   .get("/get-crops", async (c) => {
     await connectDb();
+
     try {
-      const crops = Crop.find();
+      console.log(Crop)
+      const crops = await Crop.find();
       return c.json({ crops }, 200);
     } catch (error) {
+      console.error(error)
       return c.json(
         {
           message: "Error saving crop",

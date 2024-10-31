@@ -1,4 +1,3 @@
-// models/schems.ts
 import mongoose, { Schema, Document } from "mongoose";
 
 interface ICrop extends Document {
@@ -25,9 +24,6 @@ const CropSchema: Schema = new Schema({
   email: { type: String, required: false },
 });
 
-console.log(mongoose)
-console.log("first")
-console.log(mongoose.models)
-const Crop = mongoose.models.Crop || mongoose.model<ICrop>("Crop", CropSchema);
+const Crop = mongoose.models?.Crop || mongoose.model<ICrop>("Crop", CropSchema);
 
 export default Crop
