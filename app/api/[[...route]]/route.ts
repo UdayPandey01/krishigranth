@@ -2,7 +2,7 @@ import { Hono } from "hono";
 import { handle } from "hono/vercel";
 import crops from "./crops"
 
-export const runtime = 'edge'
+// export const runtime = 'edge'
 
 const app = new Hono().basePath('/api')
 

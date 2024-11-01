@@ -6,6 +6,70 @@ import { useState } from "react";
 
 const Sell = () => {
   const [selectedImage, setSelectedImage] = useState(null);
+  const [formData, setFormData] = useState({
+    cropName: "",
+    quantity: "",
+    unitPrice: "",
+    harvestDate: "",
+    farmLocation: "",
+    description: "",
+    fullName: "",
+    // phoneNumber: "",
+    email: "",
+  });
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const data = new FormData();
+      data.append("cropName", formData.cropName);
+      data.append("quantity", formData.quantity);
+      data.append("unitPrice", formData.unitPrice);
+      data.append("harvestDate", formData.harvestDate);
+      data.append("farmLocation", formData.farmLocation);
+      data.append("description", formData.description);
+      data.append("fullName", formData.fullName);
+      // data.append("phoneNumber", formData.phoneNumber);
+      data.append("email", formData.email);
+
+      if (selectedImage) {
+        data.append("image", selectedImage);
+      }
+
+      const response = await fetch("/api/crops/sell-crop", {
+        method: "POST",
+        body: data,
+      });
+
+      if (response.ok) {
+        const result = await response.json();
+        alert("Crop successfully added!");
+        setFormData({
+          cropName: "",
+          quantity: "",
+          unitPrice: "",
+          harvestDate: "",
+          farmLocation: "",
+          description: "",
+          fullName: "",
+          // phoneNumber: "",
+          email: "",
+        });
+        setSelectedImage(null);
+      } else {
+        throw new Error("Failed to add crop");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      alert("There was an error submitting the form.");
+    }
+  };
 
   return (
     <div>
@@ -29,10 +93,13 @@ const Sell = () => {
           </div>
         )}
 
-        <div className="flex flex-col items-center space-y-4 w-full max-w-2xl p-6 bg-white shadow-lg rounded-lg">
+        <form
+          onSubmit={handleSubmit}
+          className="flex flex-col items-center space-y-4 w-full max-w-2xl p-6 bg-white shadow-lg rounded-lg"
+        >
           <input
             type="file"
-            name="myImage"
+            name="image"
             id="file-upload"
             className="hidden"
             onChange={(e) => setSelectedImage(e.target.files[0])}
@@ -46,63 +113,81 @@ const Sell = () => {
 
           <input
             type="text"
+            name="cropName"
             placeholder="Crop Name"
+            value={formData.cropName}
+            onChange={handleInputChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
           />
           <input
             type="number"
+            name="quantity"
             placeholder="Quantity Available (e.g., 500 kg)"
+            value={formData.quantity}
+            onChange={handleInputChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
           />
           <input
             type="number"
+            name="unitPrice"
             placeholder="Unit Price (e.g., per kg)"
+            value={formData.unitPrice}
+            onChange={handleInputChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
           />
           <input
             type="date"
-            placeholder="Harvest Date"
+            name="harvestDate"
+            value={formData.harvestDate}
+            onChange={handleInputChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
           />
           <input
             type="text"
+            name="farmLocation"
             placeholder="Farm Location"
+            value={formData.farmLocation}
+            onChange={handleInputChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
           />
-          {/* <input
-            type="text"
-            placeholder="Pincode"
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
-          /> */}
-
-          {/* <label className="flex items-center space-x-2 text-sm text-gray-700">
-            <input type="checkbox" className="w-4 h-4 text-blue-600" />
-            <span>Transportation Availability</span>
-          </label> */}
-
           <textarea
+            name="description"
             placeholder="Description"
+            value={formData.description}
+            onChange={handleInputChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-md h-24 focus:ring-2 focus:ring-blue-500 outline-none"
           ></textarea>
           <input
             type="text"
+            name="fullName"
             placeholder="Full Name"
+            value={formData.fullName}
+            onChange={handleInputChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
           />
-          <input
-            type="tel"
+          {/* <input
+            type="text"
+            name="phoneNumber"
             placeholder="Phone Number"
+            value={formData.phoneNumber}
+            onChange={handleInputChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
-          />
+          /> */}
           <input
             type="email"
+            name="email"
             placeholder="Email Address (optional)"
+            value={formData.email}
+            onChange={handleInputChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
           />
-        </div>
-        <button className="mt-4 p-3 bg-black  text-white font-semibold rounded-lg  ">
-          Sell Crop
-        </button>
+          <button
+            type="submit"
+            className="mt-4 p-3 bg-black text-white font-semibold rounded-lg"
+          >
+            Sell Crop
+          </button>
+        </form>
       </div>
     </div>
   );

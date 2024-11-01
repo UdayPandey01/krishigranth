@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "Crop" ALTER COLUMN "phone" SET DATA TYPE TEXT;
