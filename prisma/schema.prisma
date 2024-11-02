@@ -21,7 +21,7 @@ datasource db {
 // }
 
 model Crop {
-  id           String @id @default(uuid()) @map("_id")
+  id           String   @id @default(uuid()) @map("_id")
   cropName     String
   quantity     Int
   unitPrice    Int
@@ -30,4 +30,5 @@ model Crop {
   description  String
   fullName     String
   email        String
+  image        String
 }

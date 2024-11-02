@@ -39,7 +39,7 @@ const Sell = () => {
       data.append("email", formData.email);
 
       if (selectedImage) {
-        data.append("image", selectedImage);
+        data.append("file", selectedImage);
       }
 
       const response = await fetch("/api/crops/sell-crop", {
