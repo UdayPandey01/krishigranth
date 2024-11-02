@@ -13,12 +13,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// model Farmer {
-//   id       String @id @default(uuid()) @map("_id")
-//   fullName String
-//   phone    String
-//   email    String
-// }
+model Farmer {
+  id        String   @id @default(uuid())
+  username  String
+  age       Int
+  dob       DateTime
+  location  String
+  role      String
+}
+
+
 
 model Crop {
   id           String   @id @default(uuid()) @map("_id")
