@@ -2,9 +2,11 @@
 
 import { Navbar } from "@/components/Navbar";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const Sell = () => {
+  const router = useRouter()
   const [selectedImage, setSelectedImage] = useState(null);
   const [formData, setFormData] = useState({
     cropName: "",
@@ -22,6 +24,10 @@ const Sell = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+
+  // const handleRedirect = ()=> {
+  //   router.push('/crops')
+  // }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -49,7 +55,7 @@ const Sell = () => {
 
       if (response.ok) {
         const result = await response.json();
-        alert("Crop successfully added!");
+        router.push('/crops')
         setFormData({
           cropName: "",
           quantity: "",
