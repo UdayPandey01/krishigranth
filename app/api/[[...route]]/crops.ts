@@ -85,6 +85,31 @@ const app = new Hono()
         500
       );
     }
+  })
+  .get("/get-crop/:id", async (c) => {
+    const cropId = c.req.param("id");
+
+    try {
+      const crop = await prisma.crop.findUnique({
+        where: {
+          id: cropId,
+        },
+      });
+
+      if (!crop) {
+        return c.json({ error: "Crop not found" }, 404);
+      }
+
+      return c.json({ crop }, 200);
+    } catch (error) {
+      console.error(error);
+      return c.json(
+        {
+          error: "failed to fetch crop",
+        },
+        500
+      );
+    }
   });
 
 export default app;

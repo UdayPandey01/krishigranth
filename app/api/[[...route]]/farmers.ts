@@ -121,7 +121,7 @@ app.get("get-user-role", clerkMiddleware(), async (c) => {
       return c.json({ error: "User not found" }, 404);
     }
 
-    return c.json({ role: user.role }, 200); 
+    return c.json({ role: user.role }, 200);
   } catch (error) {
     console.error("Error fetching user role:", error);
     return c.json({ error: "Failed to fetch user role" }, 500);
