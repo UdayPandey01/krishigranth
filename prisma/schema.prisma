@@ -15,11 +15,14 @@ datasource db {
 
 model Farmer {
   id        String   @id @default(uuid())
+  clerkId   String?   @unique
   username  String
   age       Int
   dob       DateTime
   location  String
   role      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 

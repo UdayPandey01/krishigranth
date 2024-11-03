@@ -10,7 +10,12 @@ import { useUser } from '@clerk/nextjs';
 export default function Home() {
   const { user, isSignedIn } = useUser();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [hasProvidedInfo, setHasProvidedInfo] = useState(false);
+  const [hasProvidedInfo, setHasProvidedInfo] = useState<boolean>(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("hasProvidedInfo") === "true";
+    }
+    return false;
+  });
 
   const handleClose = () => {
     setIsModalOpen(false);
@@ -33,8 +38,11 @@ export default function Home() {
 
         const result = await response.json();
         console.log('Success:', result);
+
         handleClose();
+        
         setHasProvidedInfo(true);
+        localStorage.setItem("hasProvidedInfo", "true");
     } catch (error) {
         console.error('Error saving user information:', error); 
     }

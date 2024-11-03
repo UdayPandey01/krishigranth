@@ -25,10 +25,6 @@ const Sell = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  // const handleRedirect = ()=> {
-  //   router.push('/crops')
-  // }
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 

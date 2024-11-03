@@ -63,8 +63,10 @@ const page = async () => {
                 <h2 className="text-lg font-semibold">{`₹${crop.unitPrice}/Kg`}</h2>
               </div>
               <div className="flex justify-around">
-              <Button className="mt-2">View Details</Button>
-              <Button className="mt-2">Edit Crop</Button>
+                <Button className="mt-2">View Details</Button>
+                {/* {farmer[0].role === "farmer" && (
+                  <Button className="mt-2">Edit Crop</Button>
+                )} */}
               </div>
             </li>
           ))}
