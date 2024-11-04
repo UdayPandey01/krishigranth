@@ -43,6 +43,9 @@ export const Navbar = () => {
   function handleSell() {
     router.push("/sell");
   }
+  function handleCrops() {
+    router.push("/crops");
+  }
 
   return (
     <nav
@@ -78,6 +81,9 @@ export const Navbar = () => {
           </span>
           <span className="font-medium text-black cursor-pointer hover:scale-105 transform transition-transform duration-300 ease-out" onClick={handleabout}>
             About
+          </span>
+          <span className="font-medium text-black cursor-pointer hover:scale-105 transform transition-transform duration-300 ease-out" onClick={handleCrops}>
+            Crops
           </span>
           <span className="font-medium text-black cursor-pointer hover:scale-105 transform transition-transform duration-300 ease-out" onClick={handleSell}>
             Sell

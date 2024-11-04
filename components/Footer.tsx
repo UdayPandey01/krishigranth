@@ -1,8 +1,9 @@
 import React from "react";
 import Image from "next/image";
-import x from '../assests/x.webp'
-import gitHub from '../assests/githubb.png'
-import instagram from '../assests/instagram.png'
+import x from "../assests/x.webp";
+import gitHub from "../assests/githubb.png";
+import instagram from "../assests/instagram.png";
+import Link from "next/link";
 
 const Footer = () => {
   return (
@@ -22,7 +23,9 @@ const Footer = () => {
       <div className="grid grid-cols-[2fr,1fr] gap-10 px-7">
         <div className="flex flex-col gap-3">
           <span className="mb-3 font-semibold text-xl">About</span>
-          <div className="text-gray-600">About us</div>
+          <Link href="/about">
+            <div className="text-gray-600">About us</div>
+          </Link>
           <div className="text-gray-600">Collections</div>
           <div className="text-gray-600">Support us</div>
           <div className="text-gray-600">Terms & Conditions</div>
@@ -32,13 +35,21 @@ const Footer = () => {
             <span className="font-semibold text-xl">Follow us</span>
             <div className="flex gap-3 mt-3">
               <div>
-                <Image className="w-8 h-8 rounded-full" src={x} alt="x logo"/>
+                <Image className="w-8 h-8 rounded-full" src={x} alt="x logo" />
               </div>
               <div>
-              <Image className="w-8 h-8 rounded-full" src={instagram} alt="x logo"/>
+                <Image
+                  className="w-8 h-8 rounded-full"
+                  src={instagram}
+                  alt="x logo"
+                />
               </div>
               <div>
-              <Image className="w-8 h-8 rounded-full" src={gitHub} alt="x logo"/>
+                <Image
+                  className="w-8 h-8 rounded-full"
+                  src={gitHub}
+                  alt="x logo"
+                />
               </div>
             </div>
           </div>
