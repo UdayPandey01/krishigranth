@@ -2,12 +2,13 @@
 
 import { Navbar } from "@/components/Navbar";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useEffect, useState } from "react";
 
 const Sell = () => {
-  const router = useRouter()
-  const [selectedImage, setSelectedImage] = useState(null);
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [formData, setFormData] = useState({
     cropName: "",
     quantity: "",
@@ -16,16 +17,35 @@ const Sell = () => {
     farmLocation: "",
     description: "",
     fullName: "",
-    // phoneNumber: "",
     email: "",
   });
 
-  const handleInputChange = (e) => {
+  // Check if the form is in edit mode based on the search params
+  const cropId = searchParams.get("id");
+
+  useEffect(() => {
+    if (cropId) {
+      const cropName = searchParams.get("cropName") || "";
+      const unitPrice = searchParams.get("unitPrice") || "";
+      const description = searchParams.get("description") || "";
+
+      setFormData((prev) => ({
+        ...prev,
+        cropName,
+        unitPrice,
+        description,
+      }));
+    }
+  }, [searchParams]);
+
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
     try {
@@ -37,21 +57,27 @@ const Sell = () => {
       data.append("farmLocation", formData.farmLocation);
       data.append("description", formData.description);
       data.append("fullName", formData.fullName);
-      // data.append("phoneNumber", formData.phoneNumber);
       data.append("email", formData.email);
 
       if (selectedImage) {
         data.append("file", selectedImage);
       }
 
-      const response = await fetch("/api/crops/sell-crop", {
-        method: "POST",
+      const endpoint = cropId
+        ? `/api/crops/update-crop/${cropId}`
+        : "/api/crops/sell-crop";
+
+      const method = cropId ? "PATCH" : "POST";
+
+
+      const response = await fetch(endpoint, {
+        method,
         body: data,
       });
 
       if (response.ok) {
-        const result = await response.json();
-        router.push('/crops')
+        await response.json();
+        router.push("/crops");
         setFormData({
           cropName: "",
           quantity: "",
@@ -60,17 +86,18 @@ const Sell = () => {
           farmLocation: "",
           description: "",
           fullName: "",
-          // phoneNumber: "",
           email: "",
         });
         setSelectedImage(null);
       } else {
-        throw new Error("Failed to add crop");
+        throw new Error(cropId ? "Failed to update crop" : "Failed to add crop");
       }
     } catch (error) {
       console.error("Error:", error);
       alert("There was an error submitting the form.");
     }
+
+    router.refresh()
   };
 
   return (
@@ -104,7 +131,11 @@ const Sell = () => {
             name="image"
             id="file-upload"
             className="hidden"
-            onChange={(e) => setSelectedImage(e.target.files[0])}
+            onChange={(e) => {
+              if (e.target.files && e.target.files[0]) {
+                setSelectedImage(e.target.files[0]);
+              }
+            }}
           />
           <label
             htmlFor="file-upload"
@@ -167,14 +198,6 @@ const Sell = () => {
             onChange={handleInputChange}
             className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
           />
-          {/* <input
-            type="text"
-            name="phoneNumber"
-            placeholder="Phone Number"
-            value={formData.phoneNumber}
-            onChange={handleInputChange}
-            className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 outline-none"
-          /> */}
           <input
             type="email"
             name="email"
@@ -187,7 +210,7 @@ const Sell = () => {
             type="submit"
             className="mt-4 p-3 bg-black text-white font-semibold rounded-lg"
           >
-            Sell Crop
+            {cropId ? "Update Crop" : "Sell Crop"}
           </button>
         </form>
       </div>

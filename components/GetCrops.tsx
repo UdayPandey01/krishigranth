@@ -36,7 +36,6 @@ const GetCrops = ({ crop }: GetCropsProps) => {
         <Link href={`/crops/${crop.id}`}>
           <Button className="mt-2">View Details</Button>
         </Link>
-        <Button className="mt-2">Edit Crop</Button>
       </div>
     </li>
   );

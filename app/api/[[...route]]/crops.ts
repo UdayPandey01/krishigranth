@@ -110,6 +110,47 @@ const app = new Hono()
         500
       );
     }
+  })
+  .patch("/update-crop/:id", async (c) => {
+    const id = await c.req.param("id");
+  
+    try {
+      const body = await c.req.formData();
+
+      const cropName = body.get("cropName");
+      const description = body.get("description");
+      const unitPrice = body.get("unitPrice");
+
+      if (!cropName || !description || !unitPrice) {
+        return c.json({ error: "Missing required fields." }, 400);
+      }
+
+      if (typeof cropName !== "string" || typeof description !== "string" || typeof unitPrice !== "string") {
+        return c.json({ error: "Fields must be strings." }, 400);
+      }
+  
+      const unitPriceNumber = parseFloat(unitPrice);
+      if (isNaN(unitPriceNumber)) {
+        return c.json({ error: "Unit price must be a valid number." }, 400);
+      }
+
+      const updateCrop = await prisma.crop.update({
+        where: {
+          id,
+        },
+        data: {
+          cropName,
+          description,
+          unitPrice: unitPriceNumber,
+        },
+      });
+
+      return c.json({ updateCrop }, 200);
+    } catch (error) {
+      console.error("Error updating crop:", error);
+      return c.json({ error: "Failed to update crop." }, 500); 
+    }
   });
+  
 
 export default app;
