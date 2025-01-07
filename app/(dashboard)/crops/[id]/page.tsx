@@ -37,10 +37,10 @@ const CropDetails = ({ params }: { params: { id: string } }) => {
   const handleEditCrop = () => {
     if (!cropData) return;
     const query = {
-      id : cropData.id ,
+      id: cropData.id,
       cropName: cropData.cropName,
       unitPrice: cropData.unitPrice.toString(),
-      image: cropData.image,
+      image: cropData.image || "",
       description: cropData.description,
     };
     const queryString = new URLSearchParams(query).toString();
@@ -57,7 +57,7 @@ const CropDetails = ({ params }: { params: { id: string } }) => {
       <div className="grid grid-cols-3 h-screen">
         <div className="grid col-span-2 items-center justify-center">
           <Image
-            src={cropData.image}
+            src={cropData.image || "/default-image.jpg"}
             alt={cropData.cropName}
             width={650}
             height={800}

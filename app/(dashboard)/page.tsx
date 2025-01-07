@@ -8,7 +8,7 @@ import UserInfoModal from "@/components/UserInfoModal";
 import { useUser } from '@clerk/nextjs';
 
 export default function Home() {
-  const { user, isSignedIn } = useUser();
+  const { isSignedIn } = useUser();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [hasProvidedInfo, setHasProvidedInfo] = useState<boolean>(() => {
     if (typeof window !== "undefined") {

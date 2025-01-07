@@ -1,11 +1,14 @@
 "use client";
 
 import { Navbar } from "@/components/Navbar";
+// import { currentUser } from "@clerk/nextjs/server";
 import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const Sell = () => {
+  // const loggedInUser = currentUser()
+  // console.log(loggedInUser)
   const searchParams = useSearchParams();
   const router = useRouter();
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
@@ -20,7 +23,6 @@ const Sell = () => {
     email: "",
   });
 
-  // Check if the form is in edit mode based on the search params
   const cropId = searchParams.get("id");
 
   useEffect(() => {
@@ -36,7 +38,7 @@ const Sell = () => {
         description,
       }));
     }
-  }, [searchParams]);
+  }, [searchParams, cropId]);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>

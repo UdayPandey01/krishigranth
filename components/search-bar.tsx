@@ -1,14 +1,18 @@
 import { useState } from "react";
 import { GrSearch } from "react-icons/gr";
 
-export const SearchBar = ({ onSearch }) => {
+interface SearchBarProps {
+  onSearch: (city: string) => void;
+}
+
+export const SearchBar = ({ onSearch }: SearchBarProps) => {
   const [city, setCity] = useState("");
 
-  const searchCity = (e) => {
+  const searchCity = (e: React.ChangeEvent<HTMLInputElement>) => {
     setCity(e.target.value);
   };
 
-  const handleSearch = (e) => {
+  const handleSearch = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     onSearch(city);
     setCity("");

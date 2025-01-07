@@ -15,7 +15,7 @@ datasource db {
 
 model Farmer {
   id        String   @id @default(uuid())
-  clerkId   String?   @unique
+  clerkId   String?  @unique
   username  String
   age       Int
   dob       DateTime
@@ -23,12 +23,11 @@ model Farmer {
   role      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  crops     Crop[]
 }
 
-
-
 model Crop {
-  id           String   @id @default(uuid()) @map("_id")
+  id           String   @id @default(uuid())
   cropName     String
   quantity     Int
   unitPrice    Int
@@ -38,4 +37,6 @@ model Crop {
   fullName     String
   email        String
   image        String
+  farmerId     String
+  farmer       Farmer   @relation(fields: [farmerId], references: [id])
 }

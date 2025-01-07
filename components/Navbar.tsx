@@ -46,6 +46,9 @@ export const Navbar = () => {
   function handleCrops() {
     router.push("/crops");
   }
+  function handleDescription() {
+    router.push("/crop-description");
+  }
 
   return (
     <nav
@@ -70,7 +73,7 @@ export const Navbar = () => {
           >
             Weather
           </span>
-          <span className="font-medium text-black cursor-pointer hover:scale-105 transform transition-transform duration-300 ease-out">
+          <span className="font-medium text-black cursor-pointer hover:scale-105 transform transition-transform duration-300 ease-out" onClick={handleDescription}>
             Crops Description
           </span>
           <span
