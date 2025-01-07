@@ -23,7 +23,6 @@ model Farmer {
   role      String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  crops     Crop[]
 }
 
 model Crop {
@@ -37,6 +36,4 @@ model Crop {
   fullName     String
   email        String
   image        String
-  farmerId     String
-  farmer       Farmer   @relation(fields: [farmerId], references: [id])
 }

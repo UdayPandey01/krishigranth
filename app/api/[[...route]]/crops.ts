@@ -112,7 +112,7 @@ const app = new Hono()
     }
   })
   .patch("/update-crop/:id", async (c) => {
-    const id = await c.req.param("id");
+    const id = c.req.param("id");
   
     try {
       const body = await c.req.formData();
