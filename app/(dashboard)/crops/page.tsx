@@ -7,8 +7,8 @@ import GetCrops from "@/components/GetCrops";
 import prisma from "@/lib/db";
 
 const Crops = async () => {
-
   const crops = await prisma.crop.findMany();
+  console.log(crops);
   return (
     <div className="container mx-auto p-4 bg-slate-100">
       <Navbar />
