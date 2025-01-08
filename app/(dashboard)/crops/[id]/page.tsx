@@ -27,9 +27,7 @@ const CropDetails = ({ params }: PageProps) => {
   useEffect(() => {
     const fetchCrop = async () => {
       try {
-        const response = await fetch(
-          `/api/crops/get-crop/${params.id}`
-        );
+        const response = await fetch(`/api/crops/get-crop/${params.id}`);
         const data = await response.json();
         setCropData(data.crop);
       } catch (error) {
@@ -78,7 +76,10 @@ const CropDetails = ({ params }: PageProps) => {
             <div className="flex flex-col gap-4 mt-10">
               <Button className="rounded-xl bg-white text-black hover:bg-slate-200">Buy Crop</Button>
               <Button className="rounded-xl bg-white text-black hover:bg-slate-200">Add Cart</Button>
-              <Button className="rounded-xl bg-white text-black hover:bg-slate-200" onClick={handleEditCrop}>
+              <Button
+                className="rounded-xl bg-white text-black hover:bg-slate-200"
+                onClick={handleEditCrop}
+              >
                 Edit Crop
               </Button>
             </div>
