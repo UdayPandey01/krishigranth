@@ -7,14 +7,20 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface Crop {
-  id : string
+  id: string;
   cropName: string;
   unitPrice: number;
   image?: string;
   description: string;
 }
 
-const CropDetails = ({ params }: { params: { id: string } }) => {
+interface PageProps {
+  params: {
+    id: string;
+  };
+}
+
+const CropDetails = ({ params }: PageProps) => {
   const router = useRouter();
   const [cropData, setCropData] = useState<Crop | null>(null);
 
