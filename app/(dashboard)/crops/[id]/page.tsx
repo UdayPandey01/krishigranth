@@ -28,7 +28,7 @@ const CropDetails = ({ params }: PageProps) => {
     const fetchCrop = async () => {
       try {
         const response = await fetch(
-          `http://localhost:3000/api/crops/get-crop/${params.id}`
+          `/api/crops/get-crop/${params.id}`
         );
         const data = await response.json();
         setCropData(data.crop);
