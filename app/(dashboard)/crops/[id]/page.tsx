@@ -3,7 +3,7 @@
 import { Navbar } from "@/components/Navbar";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter, useParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 interface Crop {
@@ -14,20 +14,18 @@ interface Crop {
   description: string;
 }
 
-interface PageProps {
-  params: {
-    id: string;
-  };
-}
-
-const CropDetails = ({ params }: PageProps) => {
+const CropDetails = () => {
   const router = useRouter();
   const [cropData, setCropData] = useState<Crop | null>(null);
+  const params = useParams();
 
   useEffect(() => {
     const fetchCrop = async () => {
       try {
-        const response = await fetch(`/api/crops/get-crop/${params.id}`);
+        const { id } = params;
+        if (!id) return;
+
+        const response = await fetch(`/api/crops/get-crop/${id}`);
         const data = await response.json();
         setCropData(data.crop);
       } catch (error) {
@@ -36,7 +34,7 @@ const CropDetails = ({ params }: PageProps) => {
     };
 
     fetchCrop();
-  }, [params.id]);
+  }, [params]); 
 
   const handleEditCrop = () => {
     if (!cropData) return;
